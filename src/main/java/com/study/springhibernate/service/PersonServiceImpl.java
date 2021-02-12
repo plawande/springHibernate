@@ -6,6 +6,7 @@ package com.study.springhibernate.service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.study.springhibernate.entities.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.study.springhibernate.repository.PersonRepository;
 import com.study.springhibernate.entities.Person;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,7 +30,8 @@ public class PersonServiceImpl implements PersonService{
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Override
+	/*@Override
+	@Transactional
 	public Person getPersonById(Long id) {
 		// TODO Auto-generated method stub
 		Optional<Person> personOptional = personRepository.findById(id); //basic and one-to-one mapping queries fired here
@@ -37,16 +40,18 @@ public class PersonServiceImpl implements PersonService{
 			person = personOptional.get();
 		}
 		return person;		
-	}
+	}*/
 	
-	/*@Override
-	@Transactional
+	@Override
+	//@Transactional
 	public Person getPersonById(Long id) {
 		// TODO Auto-generated method stub
 		Person person = em.find(Person.class, id);
 		person.setName("Prajyot Great!");  //This will trigger an update iff @Transactional is present on top of this method
+		List<Vehicle> vehicles = person.getVehicles();
+		System.out.println(vehicles);
 		return person;
-	}*/
+	}
 
 	@Override
 	@Transactional(readOnly=true)
@@ -90,6 +95,10 @@ public class PersonServiceImpl implements PersonService{
 //https://thorben-janssen.com/transactions-spring-data-jpa/
 //https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge
 //https://stackoverflow.com/questions/5640778/hibernate-sessionfactory-vs-jpa-entitymanagerfactory
+
+//https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth#spring-section
+//https://dzone.com/articles/how-does-spring-transactional
+//https://www.baeldung.com/jpa-hibernate-persistence-context
 
 
 //The SimpleJpaRepository which an implementation of JpaRepository has @Transactional(readOnly = true) on top.

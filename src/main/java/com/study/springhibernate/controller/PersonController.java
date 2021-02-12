@@ -33,9 +33,6 @@ public class PersonController {
 	@GetMapping(path = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public PersonDto getPersonById(@PathVariable Long id) {
 		Person person = personService.getPersonById(id);
-		System.out.println("-------------------------------------------");
-		System.out.println("Main Queries done.");
-		System.out.println("-------------------------------------------");
 		PersonDto personDto = personMapper.getPersonDto(person);
 		return personDto;
 	}
