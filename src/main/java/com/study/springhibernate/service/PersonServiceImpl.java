@@ -43,12 +43,13 @@ public class PersonServiceImpl implements PersonService{
 	}*/
 	
 	@Override
-	//@Transactional
+	@Transactional
 	public Person getPersonById(Long id) {
 		// TODO Auto-generated method stub
 		Person person = em.find(Person.class, id);
+		System.out.println(em.contains(person)); //true with @Transactional and false without it
 		person.setName("Prajyot Great!");  //This will trigger an update iff @Transactional is present on top of this method
-		List<Vehicle> vehicles = person.getVehicles();
+		List<Vehicle> vehicles = person.getVehicles();  //lazyInitializationException without @Transactional
 		System.out.println(vehicles);
 		return person;
 	}
