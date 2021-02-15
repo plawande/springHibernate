@@ -42,7 +42,7 @@ public class PersonServiceImpl implements PersonService{
 		return person;		
 	}*/
 	
-	@Override
+	/*@Override
 	@Transactional
 	public Person getPersonById(Long id) {
 		// TODO Auto-generated method stub
@@ -52,9 +52,9 @@ public class PersonServiceImpl implements PersonService{
 		List<Vehicle> vehicles = person.getVehicles();  //lazyInitializationException without @Transactional
 		System.out.println(vehicles);
 		return person;
-	}
+	}*/
 
-	/*@Override
+	@Override
 	@Transactional
 	public Person getPersonById(Long id) {
 		Person person = em.createQuery("" +
@@ -66,7 +66,7 @@ public class PersonServiceImpl implements PersonService{
 				.getSingleResult();
 
 		return person;
-	}*/
+	}
 
 	@Override
 	@Transactional(readOnly=true)
