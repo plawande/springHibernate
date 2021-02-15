@@ -54,6 +54,20 @@ public class PersonServiceImpl implements PersonService{
 		return person;
 	}
 
+	/*@Override
+	@Transactional
+	public Person getPersonById(Long id) {
+		Person person = em.createQuery("" +
+				"select p " +
+				"from Person p " +
+				"left join fetch p.vehicles v " +
+				"where p.id = :id", Person.class)
+				.setParameter("id", id)
+				.getSingleResult();
+
+		return person;
+	}*/
+
 	@Override
 	@Transactional(readOnly=true)
 	public Person getPersonByIdAndName(Long id, String name) {

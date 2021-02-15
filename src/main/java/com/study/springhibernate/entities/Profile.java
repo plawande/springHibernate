@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="person_profile")
 public class Profile {
 	@Id
-	@Column(name="id")
+	@Column(name="person_id")
 	private Long id;
 	
 	@Column(name="city")
@@ -30,7 +30,6 @@ public class Profile {
 	private String phoneNo;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id")
 	@MapsId
 	private Person person;
 	

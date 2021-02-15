@@ -36,13 +36,13 @@ public class Person {
 	@Column(name="name")
 	private String name;
 	
-	@OneToOne(mappedBy="person", cascade=CascadeType.ALL) //, cascade=CascadeType.MERGE
+	@OneToOne(mappedBy="person", cascade=CascadeType.ALL)
 	private Passport passport;
 	
-	@OneToOne(mappedBy="person", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="person", cascade=CascadeType.ALL)  //one-to-one is default eager
 	private Profile profile;
 	
-	@OneToMany(mappedBy="person", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="person", cascade=CascadeType.ALL, orphanRemoval = true) //one-to-many is default lazy
 	private List<Vehicle> vehicles;
 	
 	public Person() {
