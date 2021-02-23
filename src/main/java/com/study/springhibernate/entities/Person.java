@@ -44,16 +44,20 @@ public class Person {
 	
 	@OneToMany(mappedBy="person", cascade=CascadeType.ALL, orphanRemoval = true) //one-to-many is default lazy
 	private List<Vehicle> vehicles;
+
+	@OneToMany(mappedBy = "person", cascade=CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses;
 	
 	public Person() {
 	}
 
-	public Person(Long id, String name, Passport passport, Profile profile, List<Vehicle> vehicles) {
+	public Person(Long id, String name, Passport passport, Profile profile, List<Vehicle> vehicles, List<Address> addresses) {
 		this.id = id;
 		this.name = name;
 		this.passport = passport;
 		this.profile = profile;
 		this.vehicles = vehicles;
+		this.addresses = addresses;
 	}
 
 	public Long getId() {
@@ -96,11 +100,13 @@ public class Person {
 		this.vehicles = vehicles;
 	}
 
-	/*@Override
-	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", passport=" + passport + ", profile=" + profile + ", vehicles="
-				+ vehicles + "]";
-	}*/
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
 }
 
 //https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/ (read always when you do refresher)

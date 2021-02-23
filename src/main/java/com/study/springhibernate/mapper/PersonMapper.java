@@ -7,16 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.study.springhibernate.entities.*;
+import com.study.springhibernate.models.*;
 import org.springframework.stereotype.Component;
-
-import com.study.springhibernate.entities.Passport;
-import com.study.springhibernate.entities.Person;
-import com.study.springhibernate.entities.Profile;
-import com.study.springhibernate.entities.Vehicle;
-import com.study.springhibernate.models.PassportDto;
-import com.study.springhibernate.models.PersonDto;
-import com.study.springhibernate.models.ProfileDto;
-import com.study.springhibernate.models.VehicleDto;
 
 /**
  * @author Admin
@@ -49,7 +42,7 @@ public class PersonMapper {
 		Optional<List<Vehicle>> vehicleOptional = Optional.ofNullable(vehicles);
 		List<VehicleDto> vehicleDtos = new ArrayList<>();
 		if(vehicleOptional.isPresent()) {
-			for(Vehicle vehicle: vehicles) { //get all vehicles query is fired here (one-to-many)  //does hibernate need transactional for this?
+			for(Vehicle vehicle: vehicles) { //get all vehicles query is fired here (one-to-many)  if OSIV is not disabled in Spring Boot project.
 				VehicleDto vehicleDto = new VehicleDto();
 				vehicleDto.setId(vehicle.getId());
 				vehicleDto.setNumber(vehicle.getNumber());
@@ -58,6 +51,22 @@ public class PersonMapper {
 				vehicleDtos.add(vehicleDto);
 			}
 			personDto.setVehicleDtos(vehicleDtos);
+		}
+
+		List<Address> addresses = person.getAddresses();
+		Optional<List<Address>> addressOptional = Optional.ofNullable(addresses);
+		List<AddressDto> addressDtos = new ArrayList<>();
+		if(addressOptional.isPresent()) {
+			for(Address address: addresses) {
+				AddressDto addressDto = new AddressDto();
+				addressDto.setId(address.getId());
+				addressDto.setHouseNo(address.getHouseNo());
+				addressDto.setLine1(address.getLine1());
+				addressDto.setLine2(address.getLine2());
+				addressDto.setPersonId(person.getId());
+				addressDtos.add(addressDto);
+			}
+			personDto.setAddressDtos(addressDtos);
 		}
 		
 		return personDto;

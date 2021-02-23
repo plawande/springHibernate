@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.study.springhibernate.entities.Vehicle;
+import org.hibernate.annotations.QueryHints;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,7 @@ import com.study.springhibernate.entities.Person;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Admin
@@ -29,6 +33,8 @@ public class PersonServiceImpl implements PersonService{
 
 	@PersistenceContext
 	private EntityManager em;
+
+	protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	/*@Override
 	@Transactional
@@ -54,13 +60,36 @@ public class PersonServiceImpl implements PersonService{
 		return person;
 	}*/
 
-	@Override
+	/*@Override
 	@Transactional
 	public Person getPersonById(Long id) {
 		Person person = em.createQuery("" +
 				"select p " +
 				"from Person p " +
 				"left join fetch p.vehicles v " +
+				"where p.id = :id", Person.class)
+				.setParameter("id", id)
+				.getSingleResult();
+
+		return person;
+	}*/
+
+	@Override
+	@Transactional
+	public Person getPersonById(Long id) {
+
+		Person person = em.createQuery("" +
+				"select p " +
+				"from Person p " +
+				"join fetch p.vehicles v " +
+				"where p.id = :id", Person.class)
+				.setParameter("id", id)
+				.getSingleResult();
+
+		person = em.createQuery("" +
+				"select p " +
+				"from Person p " +
+				"join fetch p.addresses a " +
 				"where p.id = :id", Person.class)
 				.setParameter("id", id)
 				.getSingleResult();
@@ -118,3 +147,6 @@ public class PersonServiceImpl implements PersonService{
 
 //The SimpleJpaRepository which an implementation of JpaRepository has @Transactional(readOnly = true) on top.
 //All save methods inside it have @Transactional
+
+//https://stackoverflow.com/questions/30088649/how-to-use-multiple-join-fetch-in-one-jpql-query
+//https://vladmihalcea.com/jpql-distinct-jpa-hibernate/#:~:text=DISTINCT%20with%20JPQL%20entity%20queries,might%20contain%20object%20reference%20duplicates.
