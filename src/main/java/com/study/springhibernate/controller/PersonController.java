@@ -3,6 +3,10 @@
  */
 package com.study.springhibernate.controller;
 
+import com.study.springhibernate.entities.Vehicle;
+import com.study.springhibernate.mapper.VehicleMapper;
+import com.study.springhibernate.models.VehicleDto;
+import com.study.springhibernate.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,8 @@ import com.study.springhibernate.mapper.PersonMapper;
 import com.study.springhibernate.models.PersonDto;
 import com.study.springhibernate.service.PersonService;
 
+import java.util.List;
+
 /**
  * @author Admin
  *
@@ -26,9 +32,15 @@ public class PersonController {
 	
 	@Autowired
 	private PersonService personService;
+
+	@Autowired
+	private VehicleService vehicleService;
 	
 	@Autowired
 	private PersonMapper personMapper;
+
+	@Autowired
+	private VehicleMapper vehicleMapper;
 	
 	@GetMapping(path = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public PersonDto getPersonById(@PathVariable Long id) {
@@ -56,5 +68,12 @@ public class PersonController {
 		Person person = personMapper.getPersonEntity(personDto);
 		Person savedPerson = personService.savePerson(person);
 		return personMapper.getPersonDto(savedPerson);
+	}
+
+	@GetMapping(path = "/vehicle", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<VehicleDto> getAllVehicles() {
+		List<Vehicle> vehicles = vehicleService.getAllVehicles();
+		List<VehicleDto> allVehicles = vehicleMapper.getAllVehicles(vehicles);
+		return allVehicles;
 	}
 }

@@ -1,8 +1,6 @@
 >How one-to-one relationships work-out when you have used join fetch?
-This looks simple but can get a bit tricky to understand when you try to compare it with something like em.find()
+This looks simple but can get a bit tricky to understand when you try to compare it with something like em.find(). <br /><br /> The query we used is below.
 
-
-    The query we used is below
     select p from Person p left join fetch p.vehicles v where p.id = :id
 
 My classes relationships are as below and this would shown be by case-1:

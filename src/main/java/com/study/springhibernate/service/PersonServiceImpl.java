@@ -149,4 +149,4 @@ public class PersonServiceImpl implements PersonService{
 //All save methods inside it have @Transactional
 
 //https://stackoverflow.com/questions/30088649/how-to-use-multiple-join-fetch-in-one-jpql-query
-//https://vladmihalcea.com/jpql-distinct-jpa-hibernate/#:~:text=DISTINCT%20with%20JPQL%20entity%20queries,might%20contain%20object%20reference%20duplicates.
+//https://vladmihalcea.com/jpql-distinct-jpa-hibernate/
