@@ -3,7 +3,7 @@ This looks simple but can get a bit tricky to understand when you try to compare
 
     select p from Person p left join fetch p.vehicles v where p.id = :id
 
-My classes relationships are as below and this would shown be by case-1:
+My classes relationships are as below and this would be shown by case-1:
 
 
 <u>Case-1</u>
