@@ -138,7 +138,7 @@ Hibernate:
 
 Just two queries generated as opposed to three in the 1st case. Weird!
 Now revert case-2 (add back (fetch=FetchType.LAZY) on Passport.java) 
-and keeping case-1 as base let's make another change.
+and keeping case-1 as base let's make the below change.
 
 <u>Case-3</u>
 
@@ -205,8 +205,8 @@ Hibernate:
         profile0_.person_id=?
 ~~~
 
-Okay so 3 queries generated, which is different from case-2 where two queries were generated.
-This is different from case-1 as well as over there 3 queries were generated but different.
+Okay so 3 queries generated, which is different from case-2 where two queries got generated.
+This is different from case-1 as well as over there 3 queries got generated but different.
 What on Earth is happening?
 
 So let's boil down.
