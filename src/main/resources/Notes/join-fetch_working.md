@@ -231,7 +231,7 @@ So let's boil down.
     Q-2)A separate select is issued to get Passport entity. The person over here is lazy. Hence, it fetches only passport.
     Q-3)A separate select is issued to get Profile entity. Inside Profile, it finds that Person is eager and then inside Person it finds that Passport is eager hence all fetched with joins.
 
-If you observe carefully in case-2 that a third query to fetch Profile. That's coz according to Hibernate optimization algo Profile has already been fetched in 2nd query itself. By Hibernate algo I mean the numbers like 1_2_3_ at the end of every line of the query.
+If you observe carefully in case-2, that a third query to fetch Profile never got fired. That's coz according to Hibernate optimization algo Profile has already been fetched in 2nd query itself. By Hibernate algo I mean the numbers like 1_2_3_ at the end of every line of the query.
 
 <u>Case-4</u>
 
