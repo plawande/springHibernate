@@ -99,7 +99,7 @@ Hibernate:
 If you see the queries generated you will realise that all vehicles are fetched by one query and <br />
 then to fetch the persons associated with the vehicles, it fires one query per-person. <br />
 So basically N queries for N persons. Thus, a total of N+1 queries. <br /><br />
-Similarly the same problem will be generated if we use (fetch=FetchType.LAZY) on Vehicle.java
+Similarly the same problem will be generated even if we use (fetch=FetchType.LAZY) on Vehicle.java
 
 ```
 Vehicle.java
