@@ -206,7 +206,7 @@ Hibernate:
 ~~~
 
 Okay so 3 queries generated, which is different from case-2 where two queries got generated.
-This is different from case-1 as well as over there 3 queries got generated but different.
+This is different from case-1 as well, as over there 3 queries got generated but somewhat different from these.
 What on Earth is happening?
 
 So let's boil down.
